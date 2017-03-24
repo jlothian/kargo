@@ -9,7 +9,7 @@ spec:
   hostNetwork: true
   containers:
   - name: kube-scheduler
-    image: {{ hyperkube_image_repo }}:{{ hyperkube_image_tag }}
+    image: {{ kube_scheduler_image_repo }}:{{ kube_scheduler_image_tag }}
     imagePullPolicy: {{ k8s_image_pull_policy }}
     resources:
       limits:
@@ -19,8 +19,7 @@ spec:
         cpu: {{ kube_scheduler_cpu_requests }}
         memory: {{ kube_scheduler_memory_requests }}
     command:
-    - /hyperkube
-    - scheduler
+    - /usr/bin/kube-scheduler
     - --leader-elect=true
     - --master={{ kube_apiserver_endpoint }}
     - --v={{ kube_log_level }}
